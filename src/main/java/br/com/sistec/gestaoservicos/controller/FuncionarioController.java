@@ -19,4 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
    model.addAttribute("funcionarios", funcionarioRepository.findAll());
    return "funcionario/listagem";
   }
+
+  @GetMapping("/form-inserir")
+  public String formInserir(){
+   return "funcionario/form-inserir";
+  }
+
+
  }
