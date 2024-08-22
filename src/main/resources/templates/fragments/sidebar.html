@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div  th:fragment="sidebar">
+
+<!-- Sidebar -->
+<div class="sidebar" data-background-color="dark">
+
+
+    <div th:replace="~{/fragments/logo.html :: logo}"></div>
+
+
+    <div class="sidebar-wrapper scrollbar scrollbar-inner">
+        <div class="sidebar-content">
+            <ul class="nav nav-secondary">
+
+                <li class="nav-item">
+                    <a th:href="@{/funcionario}">
+                        <i class="fa fa-users"></i>
+                        <p>Funcionários</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/funcionario}">
+                        <i class="fas fa-file"></i>
+                        <p>Registro de OS</p>
+                    </a>
+                </li>
+
+
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
+<!-- End Sidebar -->
