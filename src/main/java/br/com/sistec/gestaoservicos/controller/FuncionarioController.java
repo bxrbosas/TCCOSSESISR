@@ -49,9 +49,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
   return "redirect:/funcionario";
  }
 
- /*
-  * Método que direciona para templates/alunos/alterar.html
-  */
+ /* Método que direciona para templates/alunos/alterar.html */
  @GetMapping("/form-alterar/{id}")
  public String formAlterar(@PathVariable("id") Long id, Model model) {
 
