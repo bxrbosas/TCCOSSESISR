@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Cadastro de Serviços</title>
+
+
+    <div th:replace="~{/fragments/heads.html :: heads}"></div>
+
+</head>
+<body>
+<div class="wrapper">
+    <div th:replace="~{/fragments/sidebar.html :: sidebar}"></div>
+    <div class="main-panel">
+        <div th:replace="~{/fragments/main-header.html :: main-header}"></div>
+
+        <div class="container">
+            <div class="page-inner">
+                <div class="page-header">
+                    <h3 class="fw-bold mb-3">Cadastrar Serviços</h3>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <form action="#" th:action="@{/servico/salvar}" th:object="${servico}" method="post">
+                                <input type="hidden" th:field="*{id}">
+                                <div class="card-header">
+                                    <div class="card-title">Descrição do Serviço</div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-12">
+                                            <div class="form-group">
+                                                <label for="OS">Serviço</label>
+                                                <input
+                                                        type="text"
+                                                        class="form-control"
+                                                        id="OS"
+                                                        placeholder="Informe a Ordem de Serviço"
+                                                        th:field="*{dsDemanda}"
+                                                />
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-12">
+                                            <div class="form-group">
+                                                <label for="local">Local</label>
+                                                <input
+                                                        type="text"
+                                                        class="form-control"
+                                                        id="local"
+                                                        placeholder="Informe o Local do Serviço"
+                                                        th:field="*{local}"
+                                                />
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-12">
+                                            <div class="form-group">
+                                                <label for="status">Status</label>
+                                                <input
+                                                        type="text"
+                                                        class="form-control"
+                                                        id="status"
+                                                        placeholder="Informe o Status"
+                                                        th:field="*{status}"
+                                                />
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-12">
+                                            <div class="form-group">
+                                                <label for="descricao">Descrição</label>
+                                                <input
+                                                        type="text"
+                                                        class="form-control"
+                                                        id="descricao"
+                                                        placeholder="Informe a Descrição do Serviço"
+                                                        th:field="*{descricao}"
+                                                />
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="card-action">
+                                    <button class="btn btn-success" type="submit">Salvar</button>
+                                    <a href="/servico" class="btn btn-danger">Cancelar</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div th:replace="~{/fragments/footer.html :: footer}"></div>
+
+
+    <!-- Custom template | don't include it in your project! -->
+
+    <!-- End Custom template -->
+</div>
+<!--   Core JS Files   -->
+<script src="../assets/js/core/jquery-3.7.1.min.js"></script>
+<script src="../assets/js/core/popper.min.js"></script>
+<script src="../assets/js/core/bootstrap.min.js"></script>
+
+<!-- jQuery Scrollbar -->
+<script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+<!-- Datatables -->
+<script src="../assets/js/plugin/datatables/datatables.min.js"></script>
+<!-- Kaiadmin JS -->
+<script src="../assets/js/kaiadmin.min.js"></script>
+<!-- Kaiadmin DEMO methods, don't include it in your project! -->
+<script src="../assets/js/setting-demo2.js"></script>
+</body>
+</html>
