@@ -31,7 +31,7 @@
                             <div class="card-header">
                                 <span class="card-title">Listagem de Serviços</span>
                                 <a
-                                        th:href="@{/servico/form-inserir-servico}"
+                                        th:href="@{/servicos/form-inserir-servicos}"
                                         class="btn btn-primary"
                                         style="float: right"
                                 > Cadastrar Serviços
@@ -50,32 +50,30 @@
                                         >
                                             <thead>
                                             <tr>
-                                                <th>Serviço</th>
-                                                <th>Local</th>
-                                                <th>Status</th>
-                                                <th>Descrição</th>
+                                                <th>Nome</th>
+                                                <th>CPF</th>
+                                                <th>Email</th>
                                                 <th>Ações</th>
 
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr th:if="${servico.empty}">
-                                                <td colspan="5">Nenhum registro encontrado</td>
+                                            <tr th:if="${funcionarios.empty}">
+                                                <td colspan="2">Nenhum registro encontrado</td>
                                             </tr>
 
-                                            <!-- Recurso do Themyleaf. Percorre a lista de servico e preenche a tabela -->
-                                            <tr th:each="servico : ${servico}">
-                                                <td><span th:text="${servico.dsDemanda}"> Serviço </span></td>
-                                                <td><span th:text="${servico.local}"> Local </span></td>
-                                                <td><span th:text="${servico.status}"> Status </span></td>
-                                                <td><span th:text="${servico.descricao}"> Descrição </span></td>
+                                            <!-- Recurso do Themyleaf. Percorre a lista de funcionarios e preenche a tabela -->
+                                            <tr th:each="funcionario : ${funcionarios}">
+                                                <td><span th:text="${funcionario.nome}"> Nome </span></td>
+                                                <td><span th:text="${funcionario.cpf}"> Cpf </span></td>
+                                                <td><span th:text="${funcionario.email}"> Email </span></td>
                                                 <td>
 
-                                                    <a th:href="@{/servico/form-alterar-servico/{id}(id=${servico.id})}" class="edit" data-toggle="modal">
+                                                    <a th:href="@{/funcionario/form-alterar/{id}(id=${funcionario.id})}" class="edit" data-toggle="modal">
                                                         <i class="fa fa-edit" data-toggle="tooltip" title="Alterar"></i>
                                                     </a>
-                                                    <a th:href="@{/servico/excluir/{id}(id=${servico.id})}"
-                                                       th:data-confirm-delete="|Você gostaria de apagar ${servico.dsDemanda}?|"
+                                                    <a th:href="@{/funcionario/excluir/{id}(id=${funcionario.id})}"
+                                                       th:data-confirm-delete="|Você gostaria de apagar ${funcionario.nome}?|"
                                                        onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false"
 
                                                        id="alertDelete"

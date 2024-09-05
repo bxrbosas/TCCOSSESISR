@@ -17,8 +17,15 @@ public class Servico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+<<<<<<< HEAD
     private String dsDemanda;
     private String local;
     private String status;
     private String descricao;
+=======
+    private String nome;
+    private String cpf;
+    private String telefone;
+    private String email;
+>>>>>>> origin/main
 }

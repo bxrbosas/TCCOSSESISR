@@ -25,14 +25,21 @@
                     <div class="col-md-12">
                         <div class="card">
                             <form action="#" th:action="@{/servico/salvar}" th:object="${servico}" method="post">
+<<<<<<< HEAD
                                 <input type="hidden" th:field="*{id}">
                                 <div class="card-header">
                                     <div class="card-title">Descrição do Serviço</div>
+=======
+                                <input type="hidden" th:field="${servico.id}">
+                                <div class="card-header">
+                                    <div class="card-title">Dados do Serviço</div>
+>>>>>>> origin/main
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-12 col-lg-12">
                                             <div class="form-group">
+<<<<<<< HEAD
                                                 <label for="OS">Serviço</label>
                                                 <input
                                                         type="text"
@@ -40,6 +47,15 @@
                                                         id="OS"
                                                         placeholder="Informe a Ordem de Serviço"
                                                         th:field="*{dsDemanda}"
+=======
+                                                <label for="nome">Nome</label>
+                                                <input
+                                                        type="text"
+                                                        class="form-control"
+                                                        id="nome"
+                                                        placeholder="Informe o Nome do Funcionario"
+                                                        th:field="*{nome}"
+>>>>>>> origin/main
                                                 />
 
                                             </div>
@@ -47,6 +63,7 @@
 
                                         <div class="col-md-12 col-lg-12">
                                             <div class="form-group">
+<<<<<<< HEAD
                                                 <label for="local">Local</label>
                                                 <input
                                                         type="text"
@@ -54,6 +71,15 @@
                                                         id="local"
                                                         placeholder="Informe o Local do Serviço"
                                                         th:field="*{local}"
+=======
+                                                <label for="cpf">CPF</label>
+                                                <input
+                                                        type="text"
+                                                        class="form-control"
+                                                        id="cpf"
+                                                        placeholder="Informe o CPF do Funcionario"
+                                                        th:field="*{cpf}"
+>>>>>>> origin/main
                                                 />
 
                                             </div>
@@ -61,6 +87,7 @@
 
                                         <div class="col-md-12 col-lg-12">
                                             <div class="form-group">
+<<<<<<< HEAD
                                                 <label for="status">Status</label>
                                                 <input
                                                         type="text"
@@ -68,6 +95,15 @@
                                                         id="status"
                                                         placeholder="Informe o Status"
                                                         th:field="*{status}"
+=======
+                                                <label for="telefone">Telefone</label>
+                                                <input
+                                                        type="text"
+                                                        class="form-control"
+                                                        id="telefone"
+                                                        placeholder="Informe o Telefone do Funcionario"
+                                                        th:field="*{telefone}"
+>>>>>>> origin/main
                                                 />
 
                                             </div>
@@ -75,6 +111,7 @@
 
                                         <div class="col-md-12 col-lg-12">
                                             <div class="form-group">
+<<<<<<< HEAD
                                                 <label for="descricao">Descrição</label>
                                                 <input
                                                         type="text"
@@ -82,6 +119,15 @@
                                                         id="descricao"
                                                         placeholder="Informe a Descrição do Serviço"
                                                         th:field="*{descricao}"
+=======
+                                                <label for="email">Email</label>
+                                                <input
+                                                        type="text"
+                                                        class="form-control"
+                                                        id="email"
+                                                        placeholder="Informe o Email do Funcionario"
+                                                        th:field="*{email}"
+>>>>>>> origin/main
                                                 />
 
                                             </div>
@@ -91,7 +137,11 @@
                                 </div>
                                 <div class="card-action">
                                     <button class="btn btn-success" type="submit">Salvar</button>
+<<<<<<< HEAD
                                     <a href="/servico" class="btn btn-danger">Cancelar</a>
+=======
+                                    <button class="btn btn-danger">Cancelar</button>
+>>>>>>> origin/main
                                 </div>
                             </form>
                         </div>
@@ -110,6 +160,7 @@
     <!-- End Custom template -->
 </div>
 <!--   Core JS Files   -->
+<<<<<<< HEAD
 <script src="../assets/js/core/jquery-3.7.1.min.js"></script>
 <script src="../assets/js/core/popper.min.js"></script>
 <script src="../assets/js/core/bootstrap.min.js"></script>
@@ -122,5 +173,19 @@
 <script src="../assets/js/kaiadmin.min.js"></script>
 <!-- Kaiadmin DEMO methods, don't include it in your project! -->
 <script src="../assets/js/setting-demo2.js"></script>
+=======
+<script src="/assets/js/core/jquery-3.7.1.min.js"></script>
+<script src="/assets/js/core/popper.min.js"></script>
+<script src="/assets/js/core/bootstrap.min.js"></script>
+
+<!-- jQuery Scrollbar -->
+<script src="/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+<!-- Datatables -->
+<script src="/assets/js/plugin/datatables/datatables.min.js"></script>
+<!-- Kaiadmin JS -->
+<script src="/assets/js/kaiadmin.min.js"></script>
+<!-- Kaiadmin DEMO methods, don't include it in your project! -->
+<script src="/assets/js/setting-demo2.js"></script>
+>>>>>>> origin/main
 </body>
 </html>
