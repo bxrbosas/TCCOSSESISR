@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Cadastro de Serviços</title>
+    <title>Cadastro de Usuários</title>
 
 
     <div th:replace="~{/fragments/heads.html :: heads}"></div>
@@ -18,27 +18,27 @@
         <div class="container">
             <div class="page-inner">
                 <div class="page-header">
-                    <h3 class="fw-bold mb-3">Cadastrar Serviços</h3>
+                    <h3 class="fw-bold mb-3">Cadastrar Usuários</h3>
 
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-                            <form action="#" th:action="@{/servico/salvar}" th:object="${servico}" method="post">
+                            <form action="#" th:action="@{/user/salvar}" enctype="multipart/form-data" th:object="${user}" method="post">
                                 <div class="card-header">
-                                    <div class="card-title">Descrição do Serviço</div>
+                                    <div class="card-title">Dados do Usuário</div>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-12 col-lg-12">
                                             <div class="form-group">
-                                                <label for="dsDemanda">Serviço</label>
+                                                <label for="firstName">Nome</label>
                                                 <input
                                                         type="text"
                                                         class="form-control"
-                                                        id="dsDemanda"
-                                                        placeholder="Informe a Ordem de Serviço"
-                                                        th:field="*{dsDemanda}"
+                                                        id="firstName"
+                                                        placeholder="Informe o Nome do Usuário"
+                                                        th:field="*{firstName}"
                                                 />
 
                                             </div>
@@ -46,13 +46,13 @@
 
                                         <div class="col-md-12 col-lg-12">
                                             <div class="form-group">
-                                                <label for="local">Local</label>
+                                                <label for="email">Email</label>
                                                 <input
                                                         type="text"
                                                         class="form-control"
-                                                        id="local"
-                                                        placeholder="Informe o Local do Serviço"
-                                                        th:field="*{local}"
+                                                        id="email"
+                                                        placeholder="Informe o Email do Usuário"
+                                                        th:field="*{email}"
                                                 />
 
                                             </div>
@@ -60,13 +60,13 @@
 
                                         <div class="col-md-12 col-lg-12">
                                             <div class="form-group">
-                                                <label for="status">Status</label>
+                                                <label for="username">Usuário</label>
                                                 <input
                                                         type="text"
                                                         class="form-control"
-                                                        id="status"
-                                                        placeholder="Informe o Status"
-                                                        th:field="*{status}"
+                                                        id="username"
+                                                        placeholder="Informe o Nome de Usuário"
+                                                        th:field="*{username}"
                                                 />
 
                                             </div>
@@ -74,13 +74,13 @@
 
                                         <div class="col-md-12 col-lg-12">
                                             <div class="form-group">
-                                                <label for="descricao">Descrição</label>
+                                                <label for="password">Senha</label>
                                                 <input
-                                                        type="text"
+                                                        type="password"
                                                         class="form-control"
-                                                        id="descricao"
-                                                        placeholder="Informe a Descrição do Serviço"
-                                                        th:field="*{descricao}"
+                                                        id="password"
+                                                        placeholder="Informe a Senha"
+                                                        th:field="*{password}"
                                                 />
 
                                             </div>
@@ -104,7 +104,7 @@
                                 </div>
                                 <div class="card-action">
                                     <button class="btn btn-success" type="submit">Salvar</button>
-                                    <a href="/servico" class="btn btn-danger">Cancelar</a>
+                                    <a href="/user" class="btn btn-danger">Cancelar</a>
                                 </div>
                             </form>
                         </div>

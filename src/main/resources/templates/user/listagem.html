@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Cadastro de Usuários</title>
+
+
+    <div th:replace="~{/fragments/heads.html :: heads}"></div>
+
+</head>
+<body>
+<div class="wrapper">
+    <div th:replace="~{/fragments/sidebar.html :: sidebar}"></div>
+    <div class="main-panel">
+        <div th:replace="~{/fragments/main-header.html :: main-header}"></div>
+
+
+        <div class="container">
+            <div class="page-inner">
+                <div class="page-header">
+                    <h3 class="fw-bold mb-3">Cadastro de Usuários</h3>
+                </div>
+                  <div class="alert alert-success alert-dismissible fade show" th:if="${mensagem}">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <span th:text="${mensagem}"></span>
+                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <span class="card-title">Listagem de Usuários</span>
+                                <a
+                                        th:href="@{/user/form-inserir}"
+                                        class="btn btn-primary"
+                                        style="float: right"
+                                > Cadastrar Usuário
+                                </a>
+                            </div>
+
+
+                            <div class="row">
+
+
+                                <div class="card-body">
+                                <div class="table-responsive">
+                                    <table
+                                            id="basic-datatables"
+                                            class="display table table-striped table-hover"
+                                    >
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Nome</th>
+                                            <th>Email</th>
+                                            <th>Usuário</th>
+                                            <th>Ações</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:if="${users.empty}">
+                                            <td colspan="7">Nenhum registro encontrado</td>
+                                        </tr>
+
+                                        <!-- Recurso do Themyleaf. Percorre a lista de usuarios e preenche a tabela -->
+                                        <tr th:each="user : ${users}">
+                                            <td><span th:text="${user.id}"> ID </span></td>
+                                            <td><span th:text="${user.firstName}"> Nome </span></td>
+                                            <td><span th:text="${user.email}"> Email </span></td>
+                                            <td><span th:text="${user.username}"> Usuário </span></td>
+                                            <td>
+
+                                                <a th:href="@{/user/form-alterar/{id}(id=${user.id})}" class="edit" data-toggle="modal">
+                                                    <i class="fa fa-edit" data-toggle="tooltip" title="Alterar"></i>
+                                                </a>
+                                                <a th:href="@{/user/excluir/{id}(id=${user.id})}"
+                                                   th:data-confirm-delete="|Você gostaria de apagar ${user.firstName}?|"
+                                                   onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false"
+
+                                                   id="alertDelete"
+                                                   class="delete">
+                                                    <i class="fa fa-times" style="color: red; margin-left: 10px;" data-toggle="tooltip" title="Excluir"></i>
+                                                </a>
+
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div th:replace="~{/fragments/footer.html :: footer}"></div>
+    </div>
+
+
+
+
+    <!-- Custom template | don't include it in your project! -->
+
+    <!-- End Custom template -->
+</div>
+<!--   Core JS Files   -->
+<script src="../assets/js/core/jquery-3.7.1.min.js"></script>
+<script src="../assets/js/core/popper.min.js"></script>
+<script src="../assets/js/core/bootstrap.min.js"></script>
+
+<!-- jQuery Scrollbar -->
+<script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+<!-- Datatables -->
+<script src="../assets/js/plugin/datatables/datatables.min.js"></script>
+<!-- Kaiadmin JS -->
+<script src="../assets/js/kaiadmin.min.js"></script>
+<!-- Kaiadmin DEMO methods, don't include it in your project! -->
+<script src="../assets/js/setting-demo2.js"></script>
+<script>
+    $(document).ready(function () {
+          $("#basic-datatables").DataTable({
+              language: {
+                  search: "Pesquisar:",
+                  // traduzir label de "Showing 1 to 10 of 57 entries"
+                  info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                  // traduzir label de "Showing 1 to 10 of 57 entries"
+                  infoEmpty: "Mostrando 0 a 0 de 0 registros",
+                  // traduzir label de "Showing 1 to 10 of 57 entries"
+                  infoFiltered: "(filtrado de _MAX_ registros)",
+                  // traduzir label de "Showing 1 to 10 of 57 entries"
+                  infoPostFix: "",
+                  // traduzir label de "Showing 1 to 10 of 57 entries"
+                  lengthMenu: "Mostrar _MENU_ registros",
+                  paginate:{
+                      first: "Primeiro",
+                      last: "Último",
+                      next: "Próximo",
+                      previous: "Anterior",
+                  },
+              },
+          });
+      });
+
+
+
+</script>
+</body>
+</html>

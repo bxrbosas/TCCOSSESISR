@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SISTEC</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/login.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
           integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
 </head>
+
 <body>
 <div class="container">
     <div class="content first-content">
@@ -23,25 +24,25 @@
         <div class="second-column">
             <h2 class="title title-second">Fazer login</h2>
             <p class="description description-second">Use um email para logar</p>
-            <form class="form">
+            <form th:action="@{login}" method="post">
                 <!-- <label class="label-input" for="">
                     <i class="far fa-user icon-modify"></i>
                     <input type="text" placeholder="Nome">
                 </label> -->
 
-                <label class="label-input" form="">
+                <label class="label-input" name="username">
                     <i class="far fa-envelope icon-modify"></i>
-                    <input type="email" placeholder="Email">
+                    <input type="text" placeholder="Email">
                 </label>
 
-                <label class="label-input" form="">
+                <label class="label-input" name="password">
                     <i class="fas fa-lock icon-modify"></i>
                     <input type="password" placeholder="Senha">
                 </label>
 
                 <a class="password" href="#">Esqueceu sua senha?</a>
 
-                <button class="btn btn-second">Entrar</button>
+                <button type="submit" class="btn btn-second">Entrar</button>
             </form>
         </div>
     </div>

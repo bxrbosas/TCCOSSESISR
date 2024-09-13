@@ -68,6 +68,7 @@
                                                 <td><span th:text="${servico.local}"> Local </span></td>
                                                 <td><span th:text="${servico.status}"> Status </span></td>
                                                 <td><span th:text="${servico.descricao}"> Descrição </span></td>
+                                                <td><span th:text="${servico.image}"> Foto </span></td>
                                                 <td>
 
                                                     <a th:href="@{/servico/form-alterar-servico/{id}(id=${servico.id})}" class="edit" data-toggle="modal">
