@@ -24,7 +24,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-                            <form action="#" th:action="@{/servico/salvar}" th:object="${servico}" method="post">
+                            <form action="#" th:action="@{/servico/salvar}" enctype="multipart/form-data" th:object="${servico}" method="post">
                                 <div class="card-header">
                                     <div class="card-title">Descrição do Serviço</div>
                                 </div>

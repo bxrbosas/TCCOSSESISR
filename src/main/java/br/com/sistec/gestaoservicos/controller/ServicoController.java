@@ -38,15 +38,35 @@ public class ServicoController {
     }
 
     @PostMapping("/salvar")
-    public String salvar(@Valid Servico servico, BindingResult result,
-                         RedirectAttributes attributes) {
+    public String salvar(
+            @Valid Servico servico,
+            BindingResult result,
+            RedirectAttributes attributes,
+            @RequestParam("foto") MultipartFile multipartFile
+    ) throws IOException
+    {
 
         if (result.hasErrors()) {
             return "servico/form-inserir-servico";
         }
 
+        String extensao = StringUtils.getFilenameExtension(multipartFile.getOriginalFilename());
+
         servicoRepository.save(servico);
         // Adiciona uma mensagem que será exibida no template
+
+        // fileName = user.getId() + "." + extensao;
+        String fileName = servico.getId() + "." + extensao;
+
+        servico.setImage(fileName);
+
+        servicoRepository.save(servico);
+
+        String uploadPasta =  "src/main/resources/static/assets/img/imagens-os";
+
+        FileUploadUtil.saveFile(uploadPasta, fileName, multipartFile);
+
+
         attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");
         return "redirect:/servico";
     }

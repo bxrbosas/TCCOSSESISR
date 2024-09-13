@@ -22,4 +22,6 @@ public class Ambiente {
     private String description;
 
     private String localidade;
+
+    private String image;
 }
