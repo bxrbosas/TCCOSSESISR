@@ -9,4 +9,8 @@ public enum EnumPrioridade {
     EnumPrioridade(String descricao) {
         this.descricao = descricao;
     }
+
+    public String getDescricao() {
+        return descricao;
+    }
 }

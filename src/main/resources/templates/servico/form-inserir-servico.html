@@ -85,6 +85,21 @@
 
                                             </div>
                                         </div>
+                                        <div class="col-md-12 col-lg-12">
+                                            <div class="form-group">
+                                                <label for="prioridade">Prioridade</label>
+                                                <select name="prioridade" id="prioridade" class="col-sm-12">
+                                                    <option value="">Selecione</option>
+                                                    <option
+                                                            th:each="prioridade : ${T(br.com.sistec.gestaoservicos.enums.EnumPrioridade.values()}"
+                                                            th:value="${prioridade}"
+                                                            th:text="${prioridade.descricao}">
+
+                                                    </option>
+                                                </select>
+
+                                            </div>
+                                        </div>
 
                                         <div class="col-md-12 col-lg-12">
                                             <div class="form-group">
