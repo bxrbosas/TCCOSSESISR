@@ -4,22 +4,101 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Cadastro de Serviços</title>
-
-
     <div th:replace="~{/fragments/heads.html :: heads}"></div>
-
 </head>
+
+<style>
+    /* Estilos permanecem os mesmos */
+    .imagem-modal {
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .imagem-modal:hover {
+        opacity: 0.7;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px;
+        margin-top: 5%;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.9);
+    }
+
+    .modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+    }
+
+    #caption {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        height: 150px;
+    }
+
+    .modal-content,
+    #caption {
+        animation-name: zoom;
+        animation-duration: 0.6s;
+    }
+
+    @keyframes zoom {
+        from {
+            transform: scale(0);
+        }
+        to {
+            transform: scale(1);
+        }
+    }
+
+    .close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    @media only screen and (max-width: 700px) {
+        .modal-content {
+            width: 100%;
+        }
+    }
+</style>
+
 <body>
 <div class="wrapper">
     <div th:replace="~{/fragments/sidebar.html :: sidebar}"></div>
     <div class="main-panel">
         <div th:replace="~{/fragments/main-header.html :: main-header}"></div>
-
-
         <div class="container">
             <div class="page-inner">
                 <div class="page-header">
-                    <h3 class="fw-bold mb-3">Cadastro de Serviços</h3>
+                    <h3 class="fw-bold mb-3">Cadastro de Serviços teste</h3>
                 </div>
                 <div class="alert alert-success alert-dismissible fade show" th:if="${mensagem}">
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -30,24 +109,15 @@
                         <div class="card">
                             <div class="card-header">
                                 <span class="card-title">Listagem de Serviços</span>
-                                <a
-                                        th:href="@{/servico/form-inserir-servico}"
-                                        class="btn btn-primary"
-                                        style="float: right"
-                                > Cadastrar Serviços
+                                <a th:href="@{/servico/form-inserir-servico}" class="btn btn-primary"
+                                   style="float: right"> Cadastrar Serviços
                                 </a>
                             </div>
-
-
                             <div class="row">
-
-
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table
-                                                id="basic-datatables"
-                                                class="display table table-striped table-hover"
-                                        >
+                                        <table id="basic-datatables"
+                                               class="display table table-striped table-hover">
                                             <thead>
                                             <tr>
                                                 <th>Nome</th>
@@ -61,26 +131,37 @@
                                             <tr th:if="${servico.empty}">
                                                 <td colspan="2">Nenhum registro encontrado</td>
                                             </tr>
-
-                                            <!-- Recurso do Themyleaf. Percorre a lista de funcionarios e preenche a tabela -->
                                             <tr th:each="servico : ${servico}">
                                                 <td><span th:text="${servico.dsDemanda}"> Nome </span></td>
                                                 <td><span th:text="${servico.local}"> Local </span></td>
                                                 <td><span th:text="${servico.status}"> Status </span></td>
                                                 <td><span th:text="${servico.descricao}"> Descrição </span></td>
-                                                <td> <img style="height: 100px" th:src="@{/assets/img/imagens-os/{image}(image=${servico.image})}" />  </td>
+                                                <td>
+                                                    <!-- Exemplo de imagens -->
+                                                    <img class="imagem-modal" th:src="@{/assets/img/imagens-os/{image}(image=${servico.image})}" alt="Descrição da imagem" style="height: 100px">
+
+                                                    <!-- The Modal -->
+                                                    <div class="modal">
+                                                        <span class="close">&times;</span>
+                                                        <img class="modal-content">
+                                                        <div id="caption"></div>
+                                                    </div>
+                                                </td>
+
                                                 <td>
 
-                                                    <a th:href="@{/servico/form-alterar-servico/{id}(id=${servico.id})}" class="edit" data-toggle="modal">
-                                                        <i class="fa fa-edit" data-toggle="tooltip" title="Alterar"></i>
+                                                    <a th:href="@{/servico/form-alterar-servico/{id}(id=${servico.id})}"
+                                                       class="edit" data-toggle="modal">
+                                                        <i class="fa fa-edit" data-toggle="tooltip"
+                                                           title="Alterar"></i>
                                                     </a>
                                                     <a th:href="@{/servico/excluir/{id}(id=${servico.id})}"
                                                        th:data-confirm-delete="|Você gostaria de apagar ${servico.dsDemanda}?|"
                                                        onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false"
-
-                                                       id="alertDelete"
-                                                       class="delete">
-                                                        <i class="fa fa-times" style="color: red; margin-left: 10px;" data-toggle="tooltip" title="Excluir"></i>
+                                                       id="alertDelete" class="delete">
+                                                        <i class="fa fa-times"
+                                                           style="color: red; margin-left: 10px;"
+                                                           data-toggle="tooltip" title="Excluir"></i>
                                                     </a>
 
                                                 </td>
@@ -101,15 +182,40 @@
 
 
 
-    <!-- Custom template | don't include it in your project! -->
-
-    <!-- End Custom template -->
 </div>
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        // Modal e elementos
+        const modal = document.querySelector(".modal");
+        const modalImg = modal.querySelector(".modal-content");
+        const captionText = modal.querySelector("#caption");
+
+        // Delegação de eventos para imagens
+        document.body.addEventListener("click", function(event) {
+            if (event.target.classList.contains('imagem-modal')) {
+                modal.style.display = "block";
+                modalImg.src = event.target.src;
+                captionText.innerHTML = event.target.alt;
+            }
+        });
+
+        // Fechar o modal
+        modal.querySelector(".close").onclick = function() {
+            modal.style.display = "none";
+        };
+
+        // Fechar o modal ao clicar fora da imagem
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+    });
+</script>
 <!--   Core JS Files   -->
 <script src="../assets/js/core/jquery-3.7.1.min.js"></script>
 <script src="../assets/js/core/popper.min.js"></script>
 <script src="../assets/js/core/bootstrap.min.js"></script>
-
 <!-- jQuery Scrollbar -->
 <script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
 <!-- Datatables -->
@@ -120,31 +226,25 @@
 <script src="../assets/js/setting-demo2.js"></script>
 <script>
     $(document).ready(function () {
-          $("#basic-datatables").DataTable({
-              language: {
-                  search: "Pesquisar:",
-                  // traduzir label de "Showing 1 to 10 of 57 entries"
-                  info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
-                  // traduzir label de "Showing 1 to 10 of 57 entries"
-                  infoEmpty: "Mostrando 0 a 0 de 0 registros",
-                  // traduzir label de "Showing 1 to 10 of 57 entries"
-                  infoFiltered: "(filtrado de _MAX_ registros)",
-                  // traduzir label de "Showing 1 to 10 of 57 entries"
-                  infoPostFix: "",
-                  // traduzir label de "Showing 1 to 10 of 57 entries"
-                  lengthMenu: "Mostrar _MENU_ registros",
-                  paginate:{
-                      first: "Primeiro",
-                      last: "Último",
-                      next: "Próximo",
-                      previous: "Anterior",
-                  },
-              },
-          });
-      });
-
-
-
+        $("#basic-datatables").DataTable({
+            language: {
+                search: "Pesquisar:",
+                info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                infoEmpty: "Mostrando 0 a 0 de 0 registros",
+                infoFiltered: "(filtrado de _MAX_ registros)",
+                infoPostFix: "",
+                lengthMenu: "Mostrar _MENU_ registros",
+                paginate: {
+                    first: "Primeiro",
+                    last: "Último",
+                    next: "Próximo",
+                    previous: "Anterior",
+                },
+            },
+        });
+    });
 </script>
+
 </body>
+
 </html>
