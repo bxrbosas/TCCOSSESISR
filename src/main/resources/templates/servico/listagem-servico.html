@@ -98,7 +98,7 @@
         <div class="container">
             <div class="page-inner">
                 <div class="page-header">
-                    <h3 class="fw-bold mb-3">Cadastro de Serviços teste</h3>
+                    <h3 class="fw-bold mb-3">Cadastro de Serviços</h3>
                 </div>
                 <div class="alert alert-success alert-dismissible fade show" th:if="${mensagem}">
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -124,18 +124,20 @@
                                                 <th>Local</th>
                                                 <th>Status</th>
                                                 <th>Descrição</th>
+                                                <th>Prioridade</th>
 
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr th:if="${servico.empty}">
+                                            <tr th:if="${servicos.empty}">
                                                 <td colspan="2">Nenhum registro encontrado</td>
                                             </tr>
-                                            <tr th:each="servico : ${servico}">
+                                            <tr th:each="servico : ${servicos}">
                                                 <td><span th:text="${servico.dsDemanda}"> Nome </span></td>
                                                 <td><span th:text="${servico.local}"> Local </span></td>
                                                 <td><span th:text="${servico.status}"> Status </span></td>
                                                 <td><span th:text="${servico.descricao}"> Descrição </span></td>
+                                                <td><span th:text="${servico.getPrioridade().getDescricao()}"> Prioridade </span></td>
                                                 <td>
                                                     <!-- Exemplo de imagens -->
                                                     <img class="imagem-modal" th:src="@{/assets/img/imagens-os/{image}(image=${servico.image})}" alt="Descrição da imagem" style="height: 100px">
@@ -183,6 +185,7 @@
 
 
 </div>
+
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function() {
         // Modal e elementos

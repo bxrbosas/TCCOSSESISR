@@ -25,7 +25,7 @@ public class ServicoController {
 
     @GetMapping
     public String listagem(Model model) {
-        model.addAttribute("servico", servicoRepository.findAll());
+        model.addAttribute("servicos", servicoRepository.findAll());
         return "servico/listagem-servico";
     }
 

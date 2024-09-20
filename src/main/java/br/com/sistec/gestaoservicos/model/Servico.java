@@ -1,6 +1,7 @@
 package br.com.sistec.gestaoservicos.model;
 
 import br.com.sistec.gestaoservicos.enums.EnumEstadoCivil;
+import br.com.sistec.gestaoservicos.enums.EnumPrioridade;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
@@ -21,6 +22,7 @@ public class Servico {
     private String status;
     private String descricao;
     private String image;
+    private EnumPrioridade prioridade;
 
     public Long getId() {
         return id;
@@ -68,6 +70,14 @@ public class Servico {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public EnumPrioridade getPrioridade() {
+        return prioridade;
+    }
+
+    public void setPrioridade(EnumPrioridade prioridade) {
+        this.prioridade = prioridade;
     }
 }
 
