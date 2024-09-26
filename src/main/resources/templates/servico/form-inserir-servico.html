@@ -53,6 +53,7 @@
                                                         id="local"
                                                         placeholder="Informe o Local do Serviço"
                                                         th:field="*{local}"
+
                                                 />
 
                                             </div>
@@ -61,14 +62,13 @@
                                         <div class="col-md-12 col-lg-12">
                                             <div class="form-group">
                                                 <label for="status">Status</label>
-                                                <input
-                                                        type="text"
-                                                        class="form-control"
-                                                        id="status"
-                                                        placeholder="Informe o Status"
-                                                        th:field="*{status}"
-                                                />
-
+                                                <select name="status" id="status" class="col-sm-12">
+                                                    <option value="">Selecione</option>
+                                                    <option th:each="status : ${T(br.com.sistec.gestaoservicos.enums.EnumStatus).values()}"
+                                                            th:value="${status}"
+                                                            th:text="${status.descricao}">
+                                                    </option>
+                                                </select>
                                             </div>
                                         </div>
 

@@ -135,7 +135,7 @@
                                             <tr th:each="servico : ${servicos}">
                                                 <td><span th:text="${servico.dsDemanda}"> Nome </span></td>
                                                 <td><span th:text="${servico.local}"> Local </span></td>
-                                                <td><span th:text="${servico.status}"> Status </span></td>
+                                                <td><span th:text="${servico.status.getDescricao()}"> Status </span></td>
                                                 <td><span th:text="${servico.descricao}"> Descrição </span></td>
                                                 <td><span th:text="${servico.getPrioridade().getDescricao()}"> Prioridade </span></td>
                                                 <td>

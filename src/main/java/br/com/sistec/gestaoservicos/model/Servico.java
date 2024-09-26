@@ -2,6 +2,7 @@ package br.com.sistec.gestaoservicos.model;
 
 import br.com.sistec.gestaoservicos.enums.EnumEstadoCivil;
 import br.com.sistec.gestaoservicos.enums.EnumPrioridade;
+import br.com.sistec.gestaoservicos.enums.EnumStatus;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
@@ -19,10 +20,10 @@ public class Servico {
     private Long id;
     private String dsDemanda;
     private String local;
-    private String status;
     private String descricao;
     private String image;
     private EnumPrioridade prioridade;
+    private EnumStatus status;
 
     public Long getId() {
         return id;
@@ -48,14 +49,6 @@ public class Servico {
         this.local = local;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public String getDescricao() {
         return descricao;
     }
@@ -78,6 +71,14 @@ public class Servico {
 
     public void setPrioridade(EnumPrioridade prioridade) {
         this.prioridade = prioridade;
+    }
+
+    public void setStatus(EnumStatus status) {
+        this.status = status;
+    }
+
+    public EnumStatus getStatus() {
+        return status;
     }
 }
 

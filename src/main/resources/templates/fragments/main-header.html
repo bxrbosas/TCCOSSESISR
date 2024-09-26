@@ -316,26 +316,34 @@
                     >
                         <div class="avatar-sm">
                             <img
-                                    src="/assets/img/profile.jpg"
-                                    alt="..."
-                                    class="avatar-img rounded-circle"
-                            />
+                                    th:if="${#authentication.principal.id}"
+                                    th:src="@{/assets/img/fotos-usuarios/{id}(id=${#authentication.principal.image})}"
+                                    class="rounded-circle me-lg-2"
+                                    alt=""
+                                    style="width: 40px; height: 40px;"
+                            >
                         </div>
-                        <span class="profile-username">
-                      <span class="op-7">Hi,</span>
-                      <span class="fw-bold">Hizrian</span>
-                    </span>
+                        <span
+                                th:if="${#authentication.principal.id}"
+                                th:text="${#authentication.principal.firstName}"
+                                class="d-none d-lg-inline-flex"
+                        >
+	                    Usuário
+                        </span>
                     </a>
                     <ul class="dropdown-menu dropdown-user animated fadeIn">
                         <div class="dropdown-user-scroll scrollbar-outer">
                             <li>
                                 <div class="user-box">
                                     <div class="avatar-lg">
+
                                         <img
-                                                src="/assets/img/profile.jpg"
-                                                alt="image profile"
-                                                class="avatar-img rounded"
-                                        />
+                                                th:if="${#authentication.principal.id}"
+                                                th:src="@{/assets/img/fotos-usuarios/{id}(id=${#authentication.principal.image})}"
+                                                class="rounded-circle me-lg-2"
+                                                alt=""
+                                                style="width: 40px; height: 40px;"
+                                        >
                                     </div>
                                     <div class="u-text">
                                         <h4>Hizrian</h4>
@@ -346,6 +354,7 @@
                                         >View Profile</a
                                         >
                                     </div>
+
                                 </div>
                             </li>
                             <li>
@@ -356,7 +365,9 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Account Setting</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Logout</a>
+                                <form th:action="@{/logout}" method="post">
+                                    <button type="submit" class="dropdown-item">Sair</button>
+                                </form>
                             </li>
                         </div>
                     </ul>
