@@ -15,6 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/servico")
@@ -51,6 +54,7 @@ public class ServicoController {
         }
 
         String extensao = StringUtils.getFilenameExtension(multipartFile.getOriginalFilename());
+        servico.setDataCadastro(new Date());
 
         servicoRepository.save(servico);
         // Adiciona uma mensagem que será exibida no template

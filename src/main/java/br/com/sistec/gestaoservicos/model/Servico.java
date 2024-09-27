@@ -9,6 +9,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+
+import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -79,6 +82,17 @@ public class Servico {
 
     public EnumStatus getStatus() {
         return status;
+    }
+    @Basic
+    @Temporal(TemporalType.DATE)
+    private Date dataCadastro;
+
+    public Date getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
     }
 }
 
