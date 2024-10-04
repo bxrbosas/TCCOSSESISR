@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div  th:fragment="script-historico">
+    <script>
+
+
+        $(document).ready(function () {
+            $('.dynamic-update-rows').on('click', 'button[data-dynamic-update-rows-url]', function(){
+                let url = $(this).data('dynamic-update-rows-url');
+                console.log(url);
+
+                let formData = $('form').serializeArray();
+                let param = {};
+                param["name"] = $(this).attr('name');
+                param["value"] = $(this).val();
+                formData.push(param);
+
+                // Atualiaza a seção dinâmica
+                $('#dynamicTableContents').load(url, formData);
+            });
+        });
+
+
+    </script>
+</div>
+</body>
+</html>

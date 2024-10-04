@@ -73,6 +73,9 @@
                                 <div class="chart-container">
                                     <canvas id="lineChart"></canvas>
                                 </div>
+                                <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#lineChartModal">
+                                    Editar Gráfico de Linha
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -85,6 +88,9 @@
                                 <div class="chart-container">
                                     <canvas id="barChart"></canvas>
                                 </div>
+                                <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#barChartModal">
+                                    Editar Gráfico de Barra
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -100,6 +106,9 @@
                                             style="width: 50%; height: 50%"
                                     ></canvas>
                                 </div>
+                                <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#pieChartModal">
+                                    Editar Gráfico de Pizza
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -115,11 +124,89 @@
                                             style="width: 50%; height: 50%"
                                     ></canvas>
                                 </div>
+                                <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#doughnutChartModal">
+                                    Editar Gráfico de Rosquinha
+                                </button>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Modal para o gráfico de linha -->
+                    <div class="modal fade" id="lineChartModal" tabindex="-1" aria-labelledby="lineChartModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="lineChartModalLabel">Editar Gráfico de Linha</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="text" id="lineChartData" class="form-control" placeholder="Digite os dados separados por vírgula (ex: 542,480,430)">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                    <button type="button" class="btn btn-primary" onclick="updateLineChart()">Salvar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
+                    <!-- Modal para o gráfico de barras -->
+                    <div class="modal fade" id="barChartModal" tabindex="-1" aria-labelledby="barChartModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="barChartModalLabel">Editar Gráfico de Barras</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="text" id="barChartData" class="form-control" placeholder="Digite os dados separados por vírgula (ex: 3,2,9)">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                    <button type="button" class="btn btn-primary" onclick="updateBarChart()">Salvar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal para o gráfico de pizza -->
+                <div class="modal fade" id="pieChartModal" tabindex="-1" aria-labelledby="pieChartModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="pieChartModalLabel">Editar Gráfico de Pizza</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="text" id="pieChartData" class="form-control" placeholder="Digite os dados separados por vírgula (ex: 20, 30, 50)">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                <button type="button" class="btn btn-primary" onclick="updatePieChart()">Salvar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal para o gráfico de rosquinha -->
+                <div class="modal fade" id="doughnutChartModal" tabindex="-1" aria-labelledby="doughnutChart" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="doughnutChartModalLabel">Editar Gráfico de Rosquinha</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="text" id="doughnutChartData" class="form-control" placeholder="Digite os dados separados por vírgula (ex: 20, 30, 50)">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                <button type="button" class="btn btn-primary" onclick="doughnutChart()">Salvar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
                 </div>
@@ -132,11 +219,6 @@
 </div>
 
 
-
-
-<!-- Custom template | don't include it in your project! -->
-
-<!-- End Custom template -->
 
 <!--   Core JS Files   -->
 <script src="../assets/js/core/jquery-3.7.1.min.js"></script>
@@ -170,7 +252,7 @@
                 "Jun",
                 "Jul",
                 "Ago",
-                "Sey",
+                "Set",
                 "Out",
                 "Nov",
                 "Dez",
@@ -231,7 +313,7 @@
                 "Jun",
                 "Jul",
                 "Ago",
-                "Sey",
+                "Set",
                 "Out",
                 "Nov",
                 "Dez",
@@ -342,6 +424,42 @@
     var legendItems = myLegendContainer.getElementsByTagName("li");
     for (var i = 0; i < legendItems.length; i += 1) {
         legendItems[i].addEventListener("click", legendClickCallback, false);
+    }
+
+        // Função para atualizar o gráfico de linha
+    function updateLineChart() {
+        const inputData = document.getElementById("lineChartData").value;
+        const dataArray = inputData.split(',').map(Number);
+
+        myLineChart.data.datasets[0].data = dataArray;
+        myLineChart.update();
+    }
+
+        // Função para atualizar o gráfico de barras
+    function updateBarChart() {
+        const inputData = document.getElementById("barChartData").value;
+        const dataArray = inputData.split(',').map(Number);
+
+        myBarChart.data.datasets[0].data = dataArray;
+        myBarChart.update();
+    }
+
+        // Função para atualizar o gráfico de pizza
+    function updatePieChart() {
+    const inputData = document.getElementById("pieChartData").value;
+    const dataArray = inputData.split(',').map(Number);
+
+    myPieChart.data.datasets[0].data = dataArray;
+    myPieChart.update();
+    }
+
+        // Função para atualizar o gráfico de rosquinha
+    function updateDoughnutChart() {
+    const inputData = document.getElementById("doughnutChartData").value;
+    const dataArray = inputData.split(',').map(Number);
+
+    myDoughnutChart.data.datasets[0].data = dataArray;
+    myDoughnutChart.update();
     }
 </script>
 </body>

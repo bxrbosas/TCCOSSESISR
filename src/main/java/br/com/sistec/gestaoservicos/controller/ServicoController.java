@@ -1,5 +1,6 @@
 package br.com.sistec.gestaoservicos.controller;
 
+import br.com.sistec.gestaoservicos.model.Historico;
 import br.com.sistec.gestaoservicos.model.Servico;
 import br.com.sistec.gestaoservicos.model.Pessoa;
 import br.com.sistec.gestaoservicos.repository.ServicoRepository;
@@ -147,4 +148,15 @@ public class ServicoController {
         return "redirect:/servico";
     }
 
+    @PostMapping("/addHistorico")
+    public String addHistorico(Servico servico) {
+        servico.getHistoricos().add(new Historico());
+        return "servico/form-inserir-servico :: historicos";
+    }
+
+    @PostMapping("/removeHistorico")
+    public String removeHistorico(Servico servico, @RequestParam("removeDynamicRow") Integer historicoIndex) {
+        servico.getHistoricos().remove(historicoIndex.intValue());
+        return "servico/form-inserir-servico :: historicos";
+    }
 }

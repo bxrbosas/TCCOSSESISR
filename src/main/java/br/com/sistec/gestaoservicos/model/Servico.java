@@ -11,7 +11,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,7 +28,26 @@ public class Servico {
     private String descricao;
     private String image;
     private EnumPrioridade prioridade;
+    private Date dataAbertura = new Date( System.currentTimeMillis() );
     private EnumStatus status;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Historico> historicos = new ArrayList<Historico>();
+
+    public List<Historico> getHistoricos() {
+        return historicos;
+    }
+
+    public void setHistoricos(List<Historico> historicos) {
+        this.historicos = historicos;
+    }
+
+    public Date getDataAbertura() {
+        return dataAbertura;
+    }
+
+    public void setDataAbertura(Date dataAbertura) {
+        this.dataAbertura = dataAbertura;
+    }
 
     public Long getId() {
         return id;
@@ -93,6 +114,13 @@ public class Servico {
 
     public void setDataCadastro(Date dataCadastro) {
         this.dataCadastro = dataCadastro;
+    }
+
+    public void addHistorico(Historico historico) {
+        this.historicos.add(historico);
+    }
+    public void removeHistorico(Historico historico) {
+        this.historicos.remove(historico);
     }
 }
 
