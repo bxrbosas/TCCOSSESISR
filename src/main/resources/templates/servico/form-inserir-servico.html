@@ -113,6 +113,95 @@
                                             </div>
                                         </div>
 
+                                     <!--   <div class="col-md-3 col-lg-3">
+                                            <div class="form-group">
+                                                <label for="dataConclusao">Data de Conclusão</label>
+                                                <input
+                                                        type="date"
+                                                        class="form-control"
+                                                        id="dataConclusao"
+                                                        placeholder="Informe a Descrição do Serviço"
+                                                        th:field="*{dataConclusao}"
+                                                />
+
+                                            </div>
+                                        </div>-->
+
+                                        <div class="card">
+                                            <div class="card-header dynamic-update-rows">
+                                                <i class="fas fa-user"></i> Histórico
+
+                                                <button
+                                                        type="button"
+                                                        name="addHistorico"
+                                                        class="btn btn-sm btn-success"
+                                                        data-dynamic-update-rows-url="/servico/addHistorico"
+                                                >
+                                                    <i class="fas fa-plus"> Adicionar Histórico</i>
+                                                </button>
+
+                                            </div>
+
+                                            <div class="card-body">
+
+                                                <table class="table dynamic-update-rows" style="width: 100%">
+                                                    <tbody id="dynamicTableContents">
+                                                    <tr th:fragment="historicos"
+                                                        th:each="historico,rowStat : ${servico.getHistoricos()}">
+
+                                                        <td th:text="${rowStat.count}">1</td>
+
+                                                        <td>
+                                                            <input
+                                                                    type="hidden"
+                                                                    th:field="${servico.historicos[__${rowStat.index}__].id}"
+                                                            >
+                                                            <input
+                                                                    class="form-control form-control-sm"
+                                                                    type="date"
+                                                                    placeholder="Data do Histórico"
+                                                                    th:field="${servico.historicos[__${rowStat.index}__].dtHistorico}"
+                                                            />
+                                                        </td>
+
+                                                        <td>
+                                                            <input
+                                                                    class="form-control form-control-sm"
+                                                                    type="text"
+                                                                    placeholder="Descrição"
+                                                                    th:field="${servico.historicos[__${rowStat.index}__].dsHistorico}"
+                                                            />
+                                                        </td>
+
+                                                        <td>
+                                                            <input
+                                                                    class="form-control form-control-sm"
+                                                                    type="text"
+                                                                    placeholder="Imagem"
+                                                                    th:field="${servico.historicos[__${rowStat.index}__].imgHistorico}"
+                                                            />
+                                                        </td>
+
+                                                        <td>
+                                                            <div class="btn-group">
+                                                                <button
+                                                                        type="button"
+                                                                        name="removeDynamicRow"
+                                                                        th:value="${rowStat.index}"
+                                                                        class="btn btn-sm btn-danger"
+                                                                        data-dynamic-update-rows-url="/servico/removeHistorico"
+                                                                >
+                                                                    <i class="fas fa-trash"></i>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <br/>
                                     </div>
                                 </div>
                                 <div class="card-action">
@@ -135,17 +224,9 @@
     <!-- End Custom template -->
 </div>
 <!--   Core JS Files   -->
-<script src="../assets/js/core/jquery-3.7.1.min.js"></script>
-<script src="../assets/js/core/popper.min.js"></script>
-<script src="../assets/js/core/bootstrap.min.js"></script>
+<div th:replace="~{/fragments/scripts.html :: scripts}"></div>
 
-<!-- jQuery Scrollbar -->
-<script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-<!-- Datatables -->
-<script src="../assets/js/plugin/datatables/datatables.min.js"></script>
-<!-- Kaiadmin JS -->
-<script src="../assets/js/kaiadmin.min.js"></script>
-<!-- Kaiadmin DEMO methods, don't include it in your project! -->
-<script src="../assets/js/setting-demo2.js"></script>
+<div th:replace="~{/fragments/script-historico.html :: script-historico}"></div>
+
 </body>
 </html>

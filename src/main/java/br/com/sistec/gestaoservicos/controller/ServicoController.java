@@ -1,7 +1,7 @@
 package br.com.sistec.gestaoservicos.controller;
 
+import br.com.sistec.gestaoservicos.model.Historico;
 import br.com.sistec.gestaoservicos.model.Servico;
-import br.com.sistec.gestaoservicos.model.Pessoa;
 import br.com.sistec.gestaoservicos.repository.ServicoRepository;
 import br.com.sistec.gestaoservicos.util.FileUploadUtil;
 import jakarta.validation.Valid;
@@ -15,8 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Controller
@@ -147,4 +145,15 @@ public class ServicoController {
         return "redirect:/servico";
     }
 
+    @PostMapping("/addHistorico")
+    public String addHistorico(Servico servico) {
+        servico.getHistoricos().add(new Historico());
+        return "servico/form-inserir-servico :: historicos";
+    }
+
+    @PostMapping("/removeHistorico")
+    public String removeHistorico(Servico servico, @RequestParam("removeDynamicRow") Integer historicoIndex) {
+        servico.getHistoricos().remove(historicoIndex.intValue());
+        return "servico/form-inserir-servico :: historicos";
+    }
 }
