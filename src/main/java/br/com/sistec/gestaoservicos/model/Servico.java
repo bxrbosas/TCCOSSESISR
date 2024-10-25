@@ -11,7 +11,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,6 +29,25 @@ public class Servico {
     private String image;
     private EnumPrioridade prioridade;
     private EnumStatus status;
+    private Date dataAbertura = new Date( System.currentTimeMillis());
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Historico> historicos = new ArrayList<Historico>();
+
+    public Date getDataAbertura() {
+        return dataAbertura;
+    }
+
+    public void setDataAbertura(Date dataAbertura) {
+        this.dataAbertura = dataAbertura;
+    }
+
+    public List<Historico> getHistoricos() {
+        return historicos;
+    }
+
+    public void setHistoricos(List<Historico> historicos) {
+        this.historicos = historicos;
+    }
 
     public Long getId() {
         return id;
