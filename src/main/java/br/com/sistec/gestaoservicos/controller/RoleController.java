@@ -81,4 +81,3 @@ public class RoleController {
         return "redirect:/role";
     }
 }
-
