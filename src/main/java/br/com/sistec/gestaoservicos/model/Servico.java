@@ -32,6 +32,28 @@ public class Servico {
     private Date dataAbertura = new Date( System.currentTimeMillis());
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Historico> historicos = new ArrayList<Historico>();
+    @Basic
+    @Temporal(TemporalType.DATE)
+    private java.sql.Date prazoServico;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Ambiente ambiente;
+
+    public Ambiente getAmbiente() {
+        return ambiente;
+    }
+
+    public void setAmbiente(Ambiente ambiente) {
+        this.ambiente = ambiente;
+    }
+
+
+    public java.sql.Date getPrazoServico() {
+        return prazoServico;
+    }
+
+    public void setPrazoServico(java.sql.Date prazoServico) {
+        this.prazoServico = prazoServico;
+    }
 
     public Date getDataAbertura() {
         return dataAbertura;
@@ -114,6 +136,11 @@ public class Servico {
 
     public void setDataCadastro(Date dataCadastro) {
         this.dataCadastro = dataCadastro;
+    }
+
+    // retorna o nome do ambiente
+    public String getNomeAmbiente(){
+        return this.ambiente.getNome();
     }
 }
 

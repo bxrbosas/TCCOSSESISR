@@ -58,6 +58,7 @@ public class UserController {
         }
 
 
+        // Foto
         String extensao = StringUtils.getFilenameExtension(multipartFile.getOriginalFilename());
 
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -65,18 +66,15 @@ public class UserController {
         userRepository.save(user);
 
 
-        // fileName = user.getId() + "." + extensao;
+        // Foto
         String fileName = user.getId() + "." + extensao;
-
         user.setImage(fileName);
 
         userRepository.save(user);
 
-
+        // Foto
         String uploadPasta =  "src/main/resources/static/assets/img/fotos-usuarios";
-
         FileUploadUtil.saveFile(uploadPasta, fileName, multipartFile);
-
         attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");
 
         return "redirect:/user";

@@ -46,16 +46,14 @@
 
                                         <div class="col-md-12 col-lg-12">
                                             <div class="form-group">
-                                                <label for="local">Local</label>
-                                                <input
-                                                        type="text"
-                                                        class="form-control"
-                                                        id="local"
-                                                        placeholder="Informe o Local do Serviço"
-                                                        th:field="*{local}"
-
-                                                />
-
+                                                <label>Ambiente</label>
+                                                <select th:field="*{ambiente}" id="ambiente" class="col-sm-12">
+                                                    <option value="">Selecione</option>
+                                                    <option th:each="ambiente : ${ambientes}"
+                                                            th:value="${ambiente.id}"
+                                                            th:text="${ambiente.nome}">
+                                                    </option>
+                                                </select>
                                             </div>
                                         </div>
 
@@ -98,6 +96,20 @@
                                             </div>
                                         </div>
 
+                                        <div class="col-md-2 col-lg-2">
+                                            <div class="form-group">
+                                                <label for="prazoServico">Prazo do Serviço</label>
+                                                <input
+                                                        type="date"
+                                                        class="form-control"
+                                                        id="prazoServico"
+                                                        placeholder="Informe o Local do Serviço"
+                                                        th:field="*{prazoServico}"
+
+                                                />
+
+                                            </div>
+                                        </div>
 
                                         <div class="col-md-12 col-lg-12">
                                             <div class="form-group">

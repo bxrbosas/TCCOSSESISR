@@ -9,5 +9,7 @@ import java.lang.reflect.Array;
 import java.util.List;
 
 public interface ServicoRepository extends JpaRepository<Servico, Long> {
-
+    // Executa Stored Procedure ImprimirServicosporMes() com query nativa
+    @Query(value = "CALL ImprimirQuantidadeServicosporMes()", nativeQuery = true)
+    List<Object[]> imprimirServicosPorMes();
 }

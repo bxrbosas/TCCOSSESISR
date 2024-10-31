@@ -2,6 +2,7 @@ package br.com.sistec.gestaoservicos.controller;
 
 import br.com.sistec.gestaoservicos.model.Historico;
 import br.com.sistec.gestaoservicos.model.Servico;
+import br.com.sistec.gestaoservicos.repository.AmbienteRepository;
 import br.com.sistec.gestaoservicos.repository.ServicoRepository;
 import br.com.sistec.gestaoservicos.util.FileUploadUtil;
 import jakarta.validation.Valid;
@@ -24,6 +25,9 @@ public class ServicoController {
     @Autowired
     private ServicoRepository servicoRepository;
 
+    @Autowired
+    private AmbienteRepository ambienteRepository;
+
     @GetMapping
     public String listagem(Model model) {
         model.addAttribute("servicos", servicoRepository.findAll());
@@ -33,10 +37,13 @@ public class ServicoController {
     @GetMapping("/form-inserir-servico")
     public String formInserir(Model model) {
 
+        model.addAttribute("ambientes", ambienteRepository.findAll());
+
         model.addAttribute("servico", new Servico());
 
         return "servico/form-inserir-servico";
     }
+
 
     @PostMapping("/salvar")
     public String salvar(
@@ -76,6 +83,8 @@ public class ServicoController {
     /* Método que direciona para templates/alunos/alterar.html */
     @GetMapping("/form-alterar-servico/{id}")
     public String formAlterar(@PathVariable("id") Long id, Model model) {
+
+        model.addAttribute("ambientes", ambienteRepository.findAll());
 
         // Busca o aluno no banco de dados
         Servico servico = servicoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("ID inválido"));

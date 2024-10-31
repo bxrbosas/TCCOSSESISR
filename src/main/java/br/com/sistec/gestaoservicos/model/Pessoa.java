@@ -31,4 +31,7 @@ public class Pessoa {
     private String cpf;
     private String telefone;
     private String email;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private User user;
 }

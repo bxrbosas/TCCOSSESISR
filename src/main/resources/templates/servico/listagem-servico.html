@@ -126,6 +126,7 @@
                                                 <th>Descrição</th>
                                                 <th>Prioridade</th>
                                                 <th>Data de Abertura</th>
+                                                <th>Data de Conclusão</th>
                                                 <th>Imagens</th>
                                                 <th>Ações</th>
 
@@ -137,11 +138,12 @@
                                             </tr>
                                             <tr th:each="servico : ${servicos}">
                                                 <td><span th:text="${servico.dsDemanda}"> Nome </span></td>
-                                                <td><span th:text="${servico.local}"> Local </span></td>
+                                                <td><span th:text="${servico.getNomeAmbiente()}"> Local </span></td>
                                                 <td><span th:text="${servico.status.getDescricao()}"> Status </span></td>
                                                 <td><span th:text="${servico.descricao}"> Descrição </span></td>
                                                 <td><span th:text="${servico.getPrioridade().getDescricao()}"> Prioridade </span></td>
-                                                <td><span th:text="${#dates.format(servico.dataAbertura, 'dd/MM/yyyy HH:mm:ss')}"> Data</span></td>
+                                                <td><span th:text="${#dates.format(servico.dataAbertura, 'dd/MM/yyyy')}"> Data</span></td>
+                                                <td><span th:text="${#dates.format(servico.prazoServico, 'dd/MM/yyyy')}"> Data</span></td>
                                                 <td>
                                                     <!-- Exemplo de imagens -->
                                                     <img class="imagem-modal" th:src="@{/assets/img/imagens-os/{image}(image=${servico.image})}" alt="Descrição da imagem" style="height: 100px">

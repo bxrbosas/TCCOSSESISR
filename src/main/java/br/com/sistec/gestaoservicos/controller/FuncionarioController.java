@@ -3,20 +3,26 @@ package br.com.sistec.gestaoservicos.controller;
 import br.com.sistec.gestaoservicos.model.Funcionario;
 import br.com.sistec.gestaoservicos.model.Pessoa;
 import br.com.sistec.gestaoservicos.repository.FuncionarioRepository;
+import br.com.sistec.gestaoservicos.util.FileUploadUtil;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.io.IOException;
 
 @Controller
  @RequestMapping("/funcionario")
   public class FuncionarioController {
+
+ @Autowired
+ private BCryptPasswordEncoder bCryptPasswordEncoder;
 
   @Autowired
   private FuncionarioRepository funcionarioRepository;
@@ -37,13 +43,38 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
  @PostMapping("/salvar")
  public String salvar(@Valid Funcionario funcionario, BindingResult result,
-                      RedirectAttributes attributes){
+                      RedirectAttributes attributes, @RequestParam("foto") MultipartFile multipartFile) throws IOException {
 
   if (result.hasErrors()){
    return "funcionario/form-inserir";
   }
 
+  // Foto
+  String extensao = StringUtils.getFilenameExtension(multipartFile.getOriginalFilename());
+
+
+
+  if(!funcionario.getUser().getPassword().isEmpty()){
+   funcionario.getUser().setFirstName(funcionario.getNome());
+   funcionario.getUser().setEmail(funcionario.getEmail());
+   funcionario.getUser().setUsername(funcionario.getEmail());
+   funcionario.getUser().setPassword(bCryptPasswordEncoder.encode(funcionario.getUser().getPassword()));
+
+  }
+
   funcionarioRepository.save(funcionario);
+
+  // Foto
+  String fileName = funcionario.getUser().getId() + "." + extensao;
+  funcionario.getUser().setImage(fileName);
+
+  funcionarioRepository.save(funcionario);
+
+  // Foto
+  String uploadPasta =  "src/main/resources/static/assets/img/fotos-usuarios";
+  FileUploadUtil.saveFile(uploadPasta, fileName, multipartFile);
+  attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");
+
   // Adiciona uma mensagem que será exibida no template
   attributes.addFlashAttribute("mensagem", "Funcionário salvo com sucesso!");
   return "redirect:/funcionario";
@@ -81,4 +112,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
   // Redireciona para a página de listagem de alunos
   return "redirect:/funcionario";
  }
+
+
 }

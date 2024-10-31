@@ -42,6 +42,8 @@ public class AmbienteController {
             return "ambiente/form-inserir-ambiente";
         }
 
+
+
         ambienteRepository.save(ambiente);
         // Adiciona uma mensagem que será exibida no template
         attributes.addFlashAttribute("mensagem", "Ambiente salvo com sucesso!");

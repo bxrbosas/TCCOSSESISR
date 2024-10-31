@@ -47,22 +47,21 @@
 
                                         <div class="col-md-12 col-lg-12">
                                             <div class="form-group">
-                                                <label for="local">Local</label>
-                                                <input
-                                                        type="text"
-                                                        class="form-control"
-                                                        id="local"
-                                                        placeholder="Informe o Local do Serviço"
-                                                        th:field="*{local}"
-                                                />
-
+                                                <label>Ambiente</label>
+                                                <select th:field="*{ambiente}" id="ambiente" class="col-sm-12">
+                                                    <option value="">Selecione</option>
+                                                    <option th:each="ambiente : ${ambientes}"
+                                                            th:value="${ambiente.id}"
+                                                            th:text="${ambiente.nome}">
+                                                    </option>
+                                                </select>
                                             </div>
                                         </div>
 
                                         <div class="col-md-12 col-lg-12">
                                             <div class="form-group">
                                                 <label for="status">Status</label>
-                                                <select name="status" id="status" class="col-sm-12">
+                                                <select th:field="*{status}" name="status" id="status" class="col-sm-12">
                                                     <option value="">Selecione</option>
                                                     <option th:each="status : ${T(br.com.sistec.gestaoservicos.enums.EnumStatus).values()}"
                                                             th:value="${status}"
@@ -89,7 +88,7 @@
                                         <div class="col-md-12 col-lg-12">
                                             <div class="form-group">
                                                 <label for="prioridade">Prioridade</label>
-                                                <select name="prioridade" id="prioridade" class="col-sm-12">
+                                                <select th:field="*{prioridade}" name="prioridade" id="prioridade" class="col-sm-12">
                                                     <option value="">Selecione</option>
                                                     <option th:each="prioridade : ${T(br.com.sistec.gestaoservicos.enums.EnumPrioridade).values()}"
                                                             th:value="${prioridade.name()}"
