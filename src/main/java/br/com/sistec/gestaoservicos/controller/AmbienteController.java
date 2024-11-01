@@ -2,16 +2,18 @@ package br.com.sistec.gestaoservicos.controller;
 
 import br.com.sistec.gestaoservicos.model.Ambiente;
 import br.com.sistec.gestaoservicos.repository.AmbienteRepository;
+import br.com.sistec.gestaoservicos.util.FileUploadUtil;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/ambiente")
@@ -36,15 +38,29 @@ public class AmbienteController {
 
     @PostMapping("/salvar")
     public String salvar(@Valid Ambiente ambiente, BindingResult result,
-                         RedirectAttributes attributes){
+                         RedirectAttributes attributes, @RequestParam("foto") MultipartFile multipartFile) throws IOException {
 
         if (result.hasErrors()){
             return "ambiente/form-inserir-ambiente";
         }
 
+        // Foto
+        String extensao = StringUtils.getFilenameExtension(multipartFile.getOriginalFilename());
+
 
 
         ambienteRepository.save(ambiente);
+
+        // Foto
+        String fileName = ambiente.getId() + "." + extensao;
+        ambiente.setImage(fileName);
+
+        ambienteRepository.save(ambiente);
+
+        // Foto
+        String uploadPasta =  "src/main/resources/static/assets/img/fotos-ambiente";
+        FileUploadUtil.saveFile(uploadPasta, fileName, multipartFile);
+
         // Adiciona uma mensagem que será exibida no template
         attributes.addFlashAttribute("mensagem", "Ambiente salvo com sucesso!");
         return "redirect:/ambiente";
