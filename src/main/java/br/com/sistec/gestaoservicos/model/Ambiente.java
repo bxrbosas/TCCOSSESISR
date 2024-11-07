@@ -25,6 +25,6 @@ public class Ambiente {
 
     private String image;
 
-    @OneToMany (mappedBy = "ambiente")
+    @OneToMany (mappedBy = "ambiente", cascade = CascadeType.ALL)
     private List<Servico> servicos;
 }

@@ -35,7 +35,7 @@ public class Servico {
     @Basic
     @Temporal(TemporalType.DATE)
     private java.sql.Date prazoServico;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Ambiente ambiente;
 
     public Ambiente getAmbiente() {
