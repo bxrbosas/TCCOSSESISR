@@ -17,6 +17,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
+//@Data
 @Entity
 public class Servico {
 
@@ -28,48 +29,30 @@ public class Servico {
     private String descricao;
     private String image;
     private EnumPrioridade prioridade;
+    private Date dataAbertura = new Date( System.currentTimeMillis() );
     private EnumStatus status;
-    private Date dataAbertura = new Date( System.currentTimeMillis());
-    @ManyToMany(cascade = CascadeType.ALL)
+
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "historico_servico",
+
+            joinColumns = @JoinColumn(name = "servico_id"),
+            inverseJoinColumns = @JoinColumn(name = "historico_id")
+    )
     private List<Historico> historicos = new ArrayList<Historico>();
+
+    @Basic
+    @Temporal(TemporalType.DATE)
+    private Date dataCadastro;
+
     @Basic
     @Temporal(TemporalType.DATE)
     private java.sql.Date prazoServico;
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.ALL)
     private Ambiente ambiente;
 
-    public Ambiente getAmbiente() {
-        return ambiente;
-    }
-
-    public void setAmbiente(Ambiente ambiente) {
-        this.ambiente = ambiente;
-    }
-
-
-    public java.sql.Date getPrazoServico() {
-        return prazoServico;
-    }
-
-    public void setPrazoServico(java.sql.Date prazoServico) {
-        this.prazoServico = prazoServico;
-    }
-
-    public Date getDataAbertura() {
-        return dataAbertura;
-    }
-
-    public void setDataAbertura(Date dataAbertura) {
-        this.dataAbertura = dataAbertura;
-    }
-
-    public List<Historico> getHistoricos() {
-        return historicos;
-    }
-
-    public void setHistoricos(List<Historico> historicos) {
-        this.historicos = historicos;
-    }
 
     public Long getId() {
         return id;
@@ -119,16 +102,29 @@ public class Servico {
         this.prioridade = prioridade;
     }
 
-    public void setStatus(EnumStatus status) {
-        this.status = status;
+    public Date getDataAbertura() {
+        return dataAbertura;
+    }
+
+    public void setDataAbertura(Date dataAbertura) {
+        this.dataAbertura = dataAbertura;
     }
 
     public EnumStatus getStatus() {
         return status;
     }
-    @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dataCadastro;
+
+    public void setStatus(EnumStatus status) {
+        this.status = status;
+    }
+
+    public List<Historico> getHistoricos() {
+        return historicos;
+    }
+
+    public void setHistoricos(List<Historico> historicos) {
+        this.historicos = historicos;
+    }
 
     public Date getDataCadastro() {
         return dataCadastro;
@@ -138,9 +134,19 @@ public class Servico {
         this.dataCadastro = dataCadastro;
     }
 
-    // retorna o nome do ambiente
-    public String getNomeAmbiente(){
-        return this.ambiente.getNome();
+    public java.sql.Date getPrazoServico() {
+        return prazoServico;
+    }
+
+    public void setPrazoServico(java.sql.Date prazoServico) {
+        this.prazoServico = prazoServico;
+    }
+
+    public Ambiente getAmbiente() {
+        return ambiente;
+    }
+
+    public void setAmbiente(Ambiente ambiente) {
+        this.ambiente = ambiente;
     }
 }
-

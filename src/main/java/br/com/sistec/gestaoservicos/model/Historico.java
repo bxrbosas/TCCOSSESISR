@@ -10,7 +10,6 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Historico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
@@ -18,6 +17,4 @@ public class Historico {
     private String dsHistorico;
     private String dtHistorico;
     private String imgHistorico;
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Servico> servicos;
 }

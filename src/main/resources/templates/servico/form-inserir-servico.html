@@ -44,16 +44,34 @@
                                             </div>
                                         </div>
 
+
+
+                                        <!--Select Ambientes-->
                                         <div class="col-md-12 col-lg-12">
                                             <div class="form-group">
-                                                <label>Ambiente</label>
+                                                <label for="ambiente">Local</label>
                                                 <select th:field="*{ambiente}" id="ambiente" class="col-sm-12">
                                                     <option value="">Selecione</option>
                                                     <option th:each="ambiente : ${ambientes}"
                                                             th:value="${ambiente.id}"
-                                                            th:text="${ambiente.nome}">
+                                                            th:text="${ambiente.description}">
                                                     </option>
                                                 </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3 col-lg-3">
+                                            <div class="form-group">
+                                                <label for="prazoServico">Prazo do Serviço</label>
+                                                <input
+                                                        type="date"
+                                                        class="form-control"
+                                                        id="prazoServico"
+                                                        placeholder="Informe o Local do Serviço"
+                                                        th:field="*{prazoServico}"
+
+                                                />
+
                                             </div>
                                         </div>
 
@@ -96,20 +114,6 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-2 col-lg-2">
-                                            <div class="form-group">
-                                                <label for="prazoServico">Prazo do Serviço</label>
-                                                <input
-                                                        type="date"
-                                                        class="form-control"
-                                                        id="prazoServico"
-                                                        placeholder="Informe o Local do Serviço"
-                                                        th:field="*{prazoServico}"
-
-                                                />
-
-                                            </div>
-                                        </div>
 
                                         <div class="col-md-12 col-lg-12">
                                             <div class="form-group">
@@ -124,6 +128,8 @@
 
                                             </div>
                                         </div>
+
+                                        <input type="hidden" name="imgHistorico" value="">
 
                                         <div class="card">
                                             <div class="card-header dynamic-update-rows">
@@ -173,10 +179,10 @@
 
                                                         <td>
                                                             <input
-                                                                    class="form-control form-control-sm"
-                                                                    type="text"
-                                                                    placeholder="Imagem"
-                                                                    th:field="${servico.historicos[__${rowStat.index}__].imgHistorico}"
+                                                                    type="file"
+                                                                    accept="image/png, image/jpeg"
+                                                                    class="form-control"
+                                                                    name="imgHistorico"
                                                             />
                                                         </td>
 
@@ -225,6 +231,36 @@
 <div th:replace="~{/fragments/scripts.html :: scripts}"></div>
 
 <div th:replace="~{/fragments/script-historico.html :: script-historico}"></div>
+
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        // Modal e elementos
+        const modal = document.querySelector(".modal");
+        const modalImg = modal.querySelector(".modal-content");
+        const captionText = modal.querySelector("#caption");
+
+        // Delegação de eventos para imagens
+        document.body.addEventListener("click", function(event) {
+            if (event.target.classList.contains('imagem-modal')) {
+                modal.style.display = "block";
+                modalImg.src = event.target.src;
+                captionText.innerHTML = event.target.alt;
+            }
+        });
+
+        // Fechar o modal
+        modal.querySelector(".close").onclick = function() {
+            modal.style.display = "none";
+        };
+
+        // Fechar o modal ao clicar fora da imagem
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+    });
+</script>
 
 </body>
 </html>

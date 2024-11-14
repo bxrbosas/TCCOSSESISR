@@ -59,7 +59,6 @@ import java.io.IOException;
    funcionario.getUser().setEmail(funcionario.getEmail());
    funcionario.getUser().setUsername(funcionario.getEmail());
    funcionario.getUser().setPassword(bCryptPasswordEncoder.encode(funcionario.getUser().getPassword()));
-
   }
 
   funcionarioRepository.save(funcionario);

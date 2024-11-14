@@ -7,6 +7,7 @@ import br.com.sistec.gestaoservicos.repository.ServicoRepository;
 import br.com.sistec.gestaoservicos.util.FileUploadUtil;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -30,7 +31,7 @@ public class ServicoController {
 
     @GetMapping
     public String listagem(Model model) {
-        model.addAttribute("servicos", servicoRepository.findAll());
+        model.addAttribute("servicos", servicoRepository.findAll(Sort.by(Sort.Direction.DESC, "id")));
         return "servico/listagem-servico";
     }
 
@@ -44,13 +45,13 @@ public class ServicoController {
         return "servico/form-inserir-servico";
     }
 
-
     @PostMapping("/salvar")
     public String salvar(
             @Valid Servico servico,
             BindingResult result,
             RedirectAttributes attributes,
-            @RequestParam("foto") MultipartFile multipartFile
+            @RequestParam("foto") MultipartFile multipartFile,
+            @RequestParam(name = "imgHistorico", required = false) MultipartFile[] imgsHistorico
     ) throws IOException
     {
 
@@ -58,7 +59,12 @@ public class ServicoController {
             return "servico/form-inserir-servico";
         }
 
+
+
         String extensao = StringUtils.getFilenameExtension(multipartFile.getOriginalFilename());
+
+        // date sql
+
         servico.setDataCadastro(new Date());
 
         servicoRepository.save(servico);
@@ -67,9 +73,27 @@ public class ServicoController {
         // fileName = user.getId() + "." + extensao;
         String fileName = servico.getId() + "." + extensao;
 
+        // Se tem histórico, percorre as imagens imgHistorico
+
+        // Lógica para salvar as imagens do histórico com o id do histórico
+        if(!servico.getHistoricos().isEmpty()){
+            for (int i = 0; i < servico.getHistoricos().size(); i++) {
+                String extensaoHistorico = StringUtils.getFilenameExtension(imgsHistorico[i].getOriginalFilename());
+                Long idHistorico = servico.getHistoricos().get(i).getId();
+                String fileNameHistorico = idHistorico + "." + extensaoHistorico;
+                servico.getHistoricos().get(i).setImgHistorico(fileNameHistorico);
+                String uploadPastaHistorico = "src/main/resources/static/assets/img/historicos-servico/"+servico.getId();
+                FileUploadUtil.saveFile(uploadPastaHistorico, fileNameHistorico, imgsHistorico[i]);
+            }
+        }
+
         servico.setImage(fileName);
 
         servicoRepository.save(servico);
+
+
+
+
 
         String uploadPasta =  "src/main/resources/static/assets/img/imagens-os";
 
@@ -132,12 +156,12 @@ public class ServicoController {
         }
 
 
+
+
         String extensao = StringUtils.getFilenameExtension(multipartFile.getOriginalFilename());
 
         servicoRepository.save(servico);
 
-
-        // fileName = servico.getId() + "." + extensao;
         String fileName = servico.getId() + "." + extensao;
 
         servico.setImage(fileName);
@@ -165,4 +189,6 @@ public class ServicoController {
         servico.getHistoricos().remove(historicoIndex.intValue());
         return "servico/form-inserir-servico :: historicos";
     }
+
+
 }

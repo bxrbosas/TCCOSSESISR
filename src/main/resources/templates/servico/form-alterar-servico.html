@@ -45,14 +45,15 @@
                                             </div>
                                         </div>
 
+                                        <!--Select Ambientes-->
                                         <div class="col-md-12 col-lg-12">
                                             <div class="form-group">
-                                                <label>Ambiente</label>
+                                                <label for="ambiente">Local</label>
                                                 <select th:field="*{ambiente}" id="ambiente" class="col-sm-12">
                                                     <option value="">Selecione</option>
                                                     <option th:each="ambiente : ${ambientes}"
                                                             th:value="${ambiente.id}"
-                                                            th:text="${ambiente.nome}">
+                                                            th:text="${ambiente.description}">
                                                     </option>
                                                 </select>
                                             </div>
@@ -61,7 +62,7 @@
                                         <div class="col-md-12 col-lg-12">
                                             <div class="form-group">
                                                 <label for="status">Status</label>
-                                                <select th:field="*{status}" name="status" id="status" class="col-sm-12">
+                                                <select name="status" id="status" class="col-sm-12" th:field="*{status}">
                                                     <option value="">Selecione</option>
                                                     <option th:each="status : ${T(br.com.sistec.gestaoservicos.enums.EnumStatus).values()}"
                                                             th:value="${status}"
@@ -88,28 +89,13 @@
                                         <div class="col-md-12 col-lg-12">
                                             <div class="form-group">
                                                 <label for="prioridade">Prioridade</label>
-                                                <select th:field="*{prioridade}" name="prioridade" id="prioridade" class="col-sm-12">
+                                                <select name="prioridade" id="prioridade" class="col-sm-12" th:field="*{prioridade}">
                                                     <option value="">Selecione</option>
                                                     <option th:each="prioridade : ${T(br.com.sistec.gestaoservicos.enums.EnumPrioridade).values()}"
                                                             th:value="${prioridade.name()}"
                                                             th:text="${prioridade.descricao}">
                                                     </option>
                                                 </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-2 col-lg-2">
-                                            <div class="form-group">
-                                                <label for="prazoServico">Prazo do Serviço</label>
-                                                <input
-                                                        type="date"
-                                                        class="form-control"
-                                                        id="prazoServico"
-                                                        placeholder="Informe o Local do Serviço"
-                                                        th:field="*{prazoServico}"
-
-                                                />
-
                                             </div>
                                         </div>
 
@@ -174,12 +160,7 @@
                                                         </td>
 
                                                         <td>
-                                                            <input
-                                                                    class="form-control form-control-sm"
-                                                                    type="text"
-                                                                    placeholder="Imagem"
-                                                                    th:field="${servico.historicos[__${rowStat.index}__].imgHistorico}"
-                                                            />
+                                                            <img class="imagem-modal" style="height: 100px"  th:src="'/assets/img/historicos-servico/' + ${id} + '/' + ${servico.historicos[__${rowStat.index}__].imgHistorico}" />
                                                         </td>
 
                                                         <td>
