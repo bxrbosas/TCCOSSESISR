@@ -50,7 +50,7 @@ public class Servico {
     @Temporal(TemporalType.DATE)
     private java.sql.Date prazoServico;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Ambiente ambiente;
 
 

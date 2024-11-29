@@ -15,10 +15,12 @@ import java.util.List;
 @RequestMapping("/")
 public class HomeController {
 
-    @GetMapping
-    public String home(Model model){
+    @Autowired
+    private ServicoRepository servicoRepository;
 
+    @GetMapping
+    public String home(Model model) {
+        model.addAttribute("qtdServicos", servicoRepository.count());
         return "home/index";
     }
-
 }

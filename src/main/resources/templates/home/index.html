@@ -26,43 +26,44 @@
                     <span th:text="${mensagem}"></span>
                 </div>
                 <div class="row">
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card bg-primary text-white mb-4">
-                            <div class="card-body">Ordens de Serviço Registradas</div>
-                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="#">Ver detalhes</a>
-                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="card card-stats card-round">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-icon">
+                                        <div class="icon-big text-center icon-primary bubble-shadow-small">
+                                            <i class="fas fa-cogs"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col col-stats ms-3 ms-sm-0">
+                                        <div class="numbers">
+                                            <p class="card-category">Ordens de Serviço Registradas</p>
+                                            <h4 class="card-title" th:text="${qtdServicos}">Serviços</h4>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card bg-warning text-white mb-4">
-                            <div class="card-body">Ordens de Serviço Atendidas</div>
-                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="#">Ver detalhes</a>
-                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="card card-stats card-round">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-icon">
+                                        <div class="icon-big text-center icon-success bubble-shadow-small">
+                                            <i class="far fa-check-circle"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col col-stats ms-3 ms-sm-0">
+                                        <div class="numbers">
+                                            <p class="card-category">Ordens de Serviço Atendidas</p>
+                                            <h4 class="card-title">1303</h4>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card bg-success text-white mb-4">
-                            <div class="card-body">Ordens de serviço finalizadas</div>
-                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="#">Ver detalhes</a>
-                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card bg-danger text-white mb-4">
-                            <div class="card-body">Ordens de Serviço Atrasadas</div>
-                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="#">Ver detalhes</a>
-                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="card">

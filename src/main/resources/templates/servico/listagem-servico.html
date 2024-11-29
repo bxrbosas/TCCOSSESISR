@@ -145,6 +145,7 @@
                                                 <th>Descrição</th>
                                                 <th>Prioridade</th>
                                                 <th>Data de Abertura</th>
+                                                <th>Prazo do Serviço</th>
                                                 <th>Imagens</th>
                                                 <th>Ações</th>
 
@@ -162,8 +163,9 @@
                                                 <td><span th:text="${servico.descricao}"> Descrição </span></td>
                                                 <td><span th:text="${servico.getPrioridade().getDescricao()}"> Prioridade </span></td>
                                                 <td><span th:text="${#dates.format(servico.dataAbertura, 'dd/MM/yyyy HH:mm:ss')}"> Data</span></td>
+                                                <td><span th:text="${#dates.format(servico.prazoServico, 'dd/MM/yyyy')}"> Data </span></td>
                                                 <td>
-                                                    <img class="imagem-modal" th:id="'elemento-imagem-' + ${servico.id}" th:src="@{/assets/img/imagens-os/{image}(image=${servico.image})}" alt="Descrição da imagem" style="height: 100px">
+                                                    <img class="imagem-modal" th:id="'elemento-imagem-' + ${servico.id}" th:src="@{/assets/img/imagens-os/{image}(image=${servico.image})}" style="height: 100px">
 
 
 

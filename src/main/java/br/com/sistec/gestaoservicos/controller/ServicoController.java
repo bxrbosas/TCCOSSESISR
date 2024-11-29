@@ -65,7 +65,12 @@ public class ServicoController {
 
         // date sql
 
-        servico.setDataCadastro(new Date());
+
+        if(servico.getId() == null){
+
+            servico.setDataCadastro(new Date());
+
+        }
 
         servicoRepository.save(servico);
         // Adiciona uma mensagem que será exibida no template
