@@ -185,15 +185,6 @@
                                                         <i class="fa fa-edit" data-toggle="tooltip"
                                                            title="Alterar"></i>
                                                     </a>
-                                                    <a th:href="@{/servico/excluir/{id}(id=${servico.id})}"
-                                                       th:data-confirm-delete="|Você gostaria de apagar ${servico.dsDemanda}?|"
-                                                       onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false"
-                                                       id="alertDelete" class="delete">
-                                                        <i class="fa fa-times"
-                                                           style="color: red; margin-left: 10px;"
-                                                           data-toggle="tooltip" title="Excluir"></i>
-                                                    </a>
-
                                                 </td>
                                             </tr>
 

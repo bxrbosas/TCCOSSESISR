@@ -1,55 +1,53 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
 <body>
 <div  th:fragment="sidebar">
 
-<!-- Sidebar -->
-<div class="sidebar" data-background-color="dark">
+    <!-- Sidebar -->
+    <div class="sidebar" data-background-color="dark">
 
 
-    <div th:replace="~{/fragments/logo.html :: logo}"></div>
+        <div th:replace="~{/fragments/logo.html :: logo}"></div>
 
 
-    <div class="sidebar-wrapper scrollbar scrollbar-inner">
-        <div class="sidebar-content">
-            <ul class="nav nav-secondary">
+        <div class="sidebar-wrapper scrollbar scrollbar-inner">
+            <div class="sidebar-content">
+                <ul class="nav nav-secondary">
 
-                <li class="nav-item">
-                    <a th:href="@{/}">
-                        <i class="fa fa-home"></i>
-                        <p>Home</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a th:href="@{/funcionario}">
-                        <i class="fa fa-users"></i>
-                        <p>Funcionários</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a th:href="@{/servico}">
-                        <i class="fas fa-file"></i>
-                        <p>Registro de OS</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a th:href="@{/ambiente}">
-                        <i class="fas fa-map"></i>
-                        <p>Ambientes</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a th:href="@{/user}">
-                        <i class="fa fa-user"></i>
-                        <p>Usuários</p>
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a th:href="@{/}">
+                            <i class="fa fa-home"></i>
+                            <p>Home</p>
+                        </a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('ADMINISTRADOR')">
+                        <a th:href="@{/funcionario}">
+                            <i class="fa fa-users"></i>
+                            <p>Funcionários</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{/servico}">
+                            <i class="fas fa-file"></i>
+                            <p>Registro de OS</p>
+                        </a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('ADMINISTRADOR')">
+                        <a th:href="@{/ambiente}">
+                            <i class="fas fa-map"></i>
+                            <p>Ambientes</p>
+                        </a>
+                    </li>
 
 
-            </ul>
+
+                </ul>
+            </div>
         </div>
     </div>
-</div>
 </div>
 </body>
 </html>

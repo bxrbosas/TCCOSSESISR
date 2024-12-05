@@ -32,6 +32,22 @@
                                     <div class="row">
                                         <div class="col-md-12 col-lg-12">
                                             <div class="form-group">
+                                                <label for="nome">Perfil</label><br>
+                                                <select name="funcao" th:field="*{funcao}" >
+                                                    <option value="">Selecione</option>
+                                                    <option th:each="funcao : ${T(br.com.sistec.gestaoservicos.enums.Funcao).values()}"
+                                                            th:value="${funcao}"
+                                                            th:text="${funcao.descricao}"
+                                                    >
+                                                    </option>
+
+
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-lg-12">
+                                            <div class="form-group">
                                                 <label for="nome">Nome</label>
                                                 <input
                                                         type="text"
@@ -93,26 +109,26 @@
                                                        placeholder="Informe sua senha">
                                             </div>
 
-                                        <div class="col-md-12 col-lg-12">
-                                            <div class="form-group">
-                                                <label for="foto">Foto</label>
-                                                <input
-                                                        type="file"
-                                                        name="foto"
-                                                        accept="image/png, image/jpeg"
-                                                        class="form-control"
-                                                        id="foto"
-                                                />
+                                            <div class="col-md-12 col-lg-12">
+                                                <div class="form-group">
+                                                    <label for="foto">Foto</label>
+                                                    <input
+                                                            type="file"
+                                                            name="foto"
+                                                            accept="image/png, image/jpeg"
+                                                            class="form-control"
+                                                            id="foto"
+                                                    />
 
+                                                </div>
                                             </div>
-                                        </div>
 
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card-action">
-                                    <button class="btn btn-success" type="submit">Salvar</button>
-                                    <a href="/funcionario" class="btn btn-danger">Cancelar</a>
-                                </div>
+                                    <div class="card-action">
+                                        <button class="btn btn-success" type="submit">Salvar</button>
+                                        <a href="/funcionario" class="btn btn-danger">Cancelar</a>
+                                    </div>
                             </form>
                         </div>
                     </div>

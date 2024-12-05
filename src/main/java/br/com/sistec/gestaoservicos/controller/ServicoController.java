@@ -1,13 +1,17 @@
 package br.com.sistec.gestaoservicos.controller;
 
-import br.com.sistec.gestaoservicos.model.Historico;
-import br.com.sistec.gestaoservicos.model.Servico;
+import br.com.sistec.gestaoservicos.enums.EnumPrioridade;
+import br.com.sistec.gestaoservicos.enums.EnumStatus;
+import br.com.sistec.gestaoservicos.model.*;
 import br.com.sistec.gestaoservicos.repository.AmbienteRepository;
+import br.com.sistec.gestaoservicos.repository.FuncionarioRepository;
 import br.com.sistec.gestaoservicos.repository.ServicoRepository;
 import br.com.sistec.gestaoservicos.util.FileUploadUtil;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -18,6 +22,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/servico")
@@ -29,9 +35,29 @@ public class ServicoController {
     @Autowired
     private AmbienteRepository ambienteRepository;
 
+    @Autowired
+    private FuncionarioRepository funcionarioRepository;
+
     @GetMapping
     public String listagem(Model model) {
+
+        // recupera o usuário logado getPrincipal
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) auth.getPrincipal();
+
+        List<Role> roles = (List<Role>) user.getRoles();
+        Role Role = roles.get(0);
+
         model.addAttribute("servicos", servicoRepository.findAll(Sort.by(Sort.Direction.DESC, "id")));
+
+        if (!Objects.equals(Role.getName(), "ADMINISTRADOR")) {
+            Long idUsuario = user.getId();
+            Funcionario funcionario = funcionarioRepository.findByUserId(idUsuario);
+            List<Servico> listServico = servicoRepository.findByFuncionario(funcionario);
+            model.addAttribute("servicos", listServico);
+        }
+
+
         return "servico/listagem-servico";
     }
 
@@ -58,6 +84,18 @@ public class ServicoController {
         if (result.hasErrors()) {
             return "servico/form-inserir-servico";
         }
+
+
+
+        // recupera o usuário logado getPrincipal
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) auth.getPrincipal();
+        Long idUsuario = user.getId();
+        Funcionario funcionario = funcionarioRepository.findByUserId(idUsuario);
+
+        servico.setFuncionario(funcionario);
+
+
 
 
 
@@ -93,6 +131,9 @@ public class ServicoController {
         }
 
         servico.setImage(fileName);
+        // seta o status aberto
+        servico.setStatus(EnumStatus.ABERTA);
+        servico.setPrioridade(EnumPrioridade.BAIXA);
 
         servicoRepository.save(servico);
 
@@ -145,43 +186,6 @@ public class ServicoController {
     }
 
 
-
-
-
-    @PostMapping("/salvarr")
-    public String salvarr(
-            @Valid Servico servico,
-            BindingResult result,
-            RedirectAttributes attributes,
-            @RequestParam("foto") MultipartFile multipartFile
-    ) throws IOException {
-
-        if (result.hasErrors()) {
-            return "servico/form-inserir-servico";
-        }
-
-
-
-
-        String extensao = StringUtils.getFilenameExtension(multipartFile.getOriginalFilename());
-
-        servicoRepository.save(servico);
-
-        String fileName = servico.getId() + "." + extensao;
-
-        servico.setImage(fileName);
-
-        servicoRepository.save(servico);
-
-
-        String uploadPasta = "src/main/resources/static/assets/img/fotos-usuarios";
-
-        FileUploadUtil.saveFile(uploadPasta, fileName, multipartFile);
-
-        attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");
-
-        return "redirect:/servico";
-    }
 
     @PostMapping("/addHistorico")
     public String addHistorico(Servico servico) {

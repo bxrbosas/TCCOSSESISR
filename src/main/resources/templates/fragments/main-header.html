@@ -50,7 +50,7 @@
                                     style="width: 40px; height: 40px;"
                             >
                         </div>
-                        <span
+                        <span style="margin-left: 10px;"
                                 th:if="${#authentication.principal.id}"
                                 th:text="${#authentication.principal.firstName}"
                                 class="d-none d-lg-inline-flex"
@@ -79,7 +79,10 @@
                                                 class="d-none d-lg-inline-flex"
                                             >
                                         </h4>
-                                        <p class="text-muted">hello@example.com</p>
+                                        <p
+                                                th:if="${#authentication.principal.id}"
+                                                th:text="${#authentication.principal.username}"
+                                                class="text-muted">hello@example.com</p>
                                     </div>
 
                                 </div>

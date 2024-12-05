@@ -39,6 +39,8 @@ public class SecurityConfig {
 
         httpSecurity
                 .authorizeHttpRequests((requests) -> requests
+                        .requestMatchers(new AntPathRequestMatcher("/funcionario/**")).hasAnyAuthority("ADMINISTRADOR")
+                        .requestMatchers(new AntPathRequestMatcher("/ambiente/**")).hasAnyAuthority("ADMINISTRADOR")
                         .requestMatchers(new AntPathRequestMatcher("/login/**")).permitAll()
                         .anyRequest().authenticated()
                 )

@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -75,7 +78,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-12 col-lg-12">
+                                        <div class="col-md-12 col-lg-12" sec:authorize="hasAnyAuthority('ADMINISTRADOR')">
                                             <div class="form-group">
                                                 <label for="status">Status</label>
                                                 <select name="status" id="status" class="col-sm-12">
@@ -101,7 +104,7 @@
 
                                             </div>
                                         </div>
-                                        <div class="col-md-12 col-lg-12">
+                                        <div class="col-md-12 col-lg-12" sec:authorize="hasAnyAuthority('ADMINISTRADOR')">
                                             <div class="form-group">
                                                 <label for="prioridade">Prioridade</label>
                                                 <select name="prioridade" id="prioridade" class="col-sm-12">
@@ -131,7 +134,7 @@
 
                                         <input type="hidden" name="imgHistorico" value="">
 
-                                        <div class="card">
+                                        <div class="card" sec:authorize="hasAnyAuthority('ADMINISTRADOR')">
                                             <div class="card-header dynamic-update-rows">
                                                 <i class="fas fa-user"></i> Histórico
 
@@ -146,7 +149,7 @@
 
                                             </div>
 
-                                            <div class="card-body">
+                                            <div class="card-body" sec:authorize="hasAnyAuthority('ADMINISTRADOR')">
 
                                                 <table class="table dynamic-update-rows" style="width: 100%">
                                                     <tbody id="dynamicTableContents">
